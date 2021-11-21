@@ -1,0 +1,38 @@
+.notFound {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+}
+
+.NotFound__text {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.notFound__head {
+    margin: auto;
+    font-weight: normal;
+    font-size: 140px;
+    line-height: 169px;
+    text-align: center;
+    align-self: center;
+}
+
+.notFound__desc {
+    margin: auto;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+}
+
+.notFound__link {
+    margin-bottom: 8vh;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #4285F4;
+}

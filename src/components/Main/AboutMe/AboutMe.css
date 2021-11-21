@@ -1,0 +1,139 @@
+.aboutMe {
+    padding: 90px 70px;
+}
+
+.aboutMe__head {
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    padding-bottom: 23px;
+    border-bottom: #DADADA 1px solid;
+}
+
+.aboutMe__table {
+    margin: 66px auto 0;
+    display: grid;
+    grid-column-gap: 49px;
+    grid-template-columns: 2fr 1fr;
+}
+
+.aboutMe__table-head {
+    margin: 0;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+}
+
+.aboutMe__table-subtitle {
+    margin: 18px 0 26px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.aboutMe__table-desc {
+    margin: 0;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.aboutMe__table-avatar {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.aboutMe__table-links {
+    margin: 99px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.aboutMe__table-links li {
+    margin-right: 20px;
+}
+
+.aboutMe__table-links li:last-child {
+    margin-right: 0;
+}
+
+.aboutMe__table-links-item {
+    color: #FFFFFF;
+    text-decoration: none;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    transition: linear 400ms;
+}
+
+.aboutMe__table-links-item:hover, .aboutMe__table-links-item:focus, .aboutMe__table-links-item:active {
+    opacity: 50%;
+}
+
+@media screen and (max-width: 850px) {
+    .aboutMe {
+        padding: 90px 30px;
+    }
+
+    .aboutMe__table {
+        grid-template-columns: 3fr 2fr;
+    }
+
+    .aboutMe__table-head {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .aboutMe__table-subtitle {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 16px 0 20px;
+    }
+
+    .aboutMe__table-desc {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .aboutMe__table-links {
+        margin-top: 87px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .aboutMe {
+        padding: 70px 9px;
+    }
+
+    .aboutMe__table {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .aboutMe__table-avatar {
+        margin-bottom: 40px;
+    }
+
+    .aboutMe__table-links {
+        margin-top: 40px;
+    }
+
+    .aboutMe__table-head {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .aboutMe__table-subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 20px 0 20px;
+    }
+    .aboutMe__table-desc {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}
