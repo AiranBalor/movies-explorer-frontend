@@ -33,7 +33,7 @@
     transition: linear 500ms;
 }
 .footer__text:hover, .footer__text:focus, .footer__text:active {
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .footer__links {

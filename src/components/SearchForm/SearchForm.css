@@ -57,15 +57,5 @@
     transition: linear 300ms;
 }
 .search__element-button:hover, .search__element-button:focus, .search__element-button:active {
-    opacity: 80%;
+    opacity: 0.5;
 }
-
-/* @media screen and (max-width: 850px) {
-    .search {
-        flex-direction: column;
-        padding-bottom: 57px;
-    }
-    .search__element {
-        width: 100%;
-    }
-} */
