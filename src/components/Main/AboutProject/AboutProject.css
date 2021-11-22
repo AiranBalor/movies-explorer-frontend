@@ -1,0 +1,131 @@
+.aboutPr {
+    margin: 110px 70px 110px;
+}
+
+.aboutPr__header {
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 27px;
+    padding-bottom: 23px;
+    border-bottom: #DADADA 1px solid;
+    margin: 0;
+}
+
+.aboutPr__table {
+    display: grid;
+    margin: 70px auto 110px;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 40px;
+}
+
+.aboutPr__table-header {
+    font-weight: normal;
+    font-size: 1.25rem;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    margin: 0 0 26px 0;
+}
+
+.aboutPr__table-desc {
+    font-weight: normal;
+    font-size: 0.9rem;
+    line-height: 20px;
+    margin: 0;
+}
+
+.aboutPr__line {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.aboutPr__line-item:first-child {
+    margin: 0 auto;
+    flex-grow: 1;
+}
+
+.aboutPr__line-item {
+    margin: 0 auto;
+    flex-grow: 4;
+}
+
+.aboutPr__line-item-header#one {
+    margin: 0 auto;
+    padding: 9px 14px;
+    background: #3DDC84;
+    color: #000000;
+
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.aboutPr__line-item-header#two {
+    margin: 0 auto;
+    padding: 9px 85px;
+    background: #303030;
+
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.aboutPr__line-item-desc {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #8B8B8B;
+}
+
+@media screen and (max-width: 768px) {
+    .aboutPr {
+        margin: 70px 30px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .aboutPr {
+        margin: 70px 9px;
+    }
+
+    .aboutPr__header {
+        padding-bottom: 28px;
+    }
+
+    .aboutPr__table {
+        margin: 60px auto;
+        grid-template-columns: 1fr;
+    }
+
+    .aboutPr__table-header {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 16px;
+    }
+
+    .aboutPr__table-desc {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .aboutPr__table-desc:first-of-type {
+        margin-bottom: 56px;
+    }
+
+    .aboutPr__line-item-header#one {
+        font-size: 11px;
+        white-space: nowrap;
+        line-height: 13px;
+    }
+
+    .aboutPr__line-item-header#two {
+        font-size: 11px;
+        white-space: nowrap;
+        line-height: 13px;
+    }
+    .aboutPr__line-item-desc {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}

@@ -1,0 +1,32 @@
+.SiteNav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 36px;
+    margin-right: 10px;
+    color: #FFFFFF;
+    text-decoration: none;
+    background: #303030;
+    border-radius: 10px;
+    transition: linear 200ms;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.SiteNav-link:hover, .navTab_item:focus, .navTab_item:active {
+    opacity: 0.5;
+}
+@media screen and (max-width: 425px) {
+    .SiteNav-link {
+        width: 82px;
+        height: 26px;
+        font-size: 10px;
+        margin-right: 6px;
+    }
+
+    .SiteNav-link:last-of-type {
+        margin-right: 0;
+    }
+}

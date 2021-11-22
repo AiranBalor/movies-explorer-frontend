@@ -1,0 +1,50 @@
+.promo {
+    margin: 20px auto 0;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    width: 95%;
+    background: #272727;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.promo__head {
+    margin: auto;
+    max-width: 730px;
+    color: #FFFFFF;
+    font-weight: normal;
+    font-size: 3.1rem;
+    line-height: 58px;
+    text-align: center;
+    align-self: center;
+}
+
+.promo__nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 17px;
+}
+
+@media all and (max-width: 768px) {
+    .promo {
+        width: 100%;
+    }
+
+    .promo__head {
+        font-size: 40px;
+    }
+}
+
+@media all and (max-width: 425px) {
+    .promo {
+        width: 95%;
+        padding-bottom: 22px;
+    }
+    .promo__head {
+        font-size: 29px;
+        line-height: 37px;
+    }
+}

@@ -1,0 +1,21 @@
+.header {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    min-height: 74px;
+    box-sizing: border-box;
+}
+
+.logo {
+    margin-right: 44px;
+}
+
+.header__logo {
+    transition: linear 200ms;
+}
+
+.header__logo:focus, .header__logo:hover {
+    opacity: 50%;
+}

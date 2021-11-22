@@ -1,0 +1,144 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    width: 60%;
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    line-height: 1.22;
+    
+}
+
+.nav__none-auth {
+    justify-content: flex-end;
+}
+
+.nav__list {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav__link {
+    padding: 8px 0;
+    margin-right: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: opacity .3s;
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.nav__link:hover, .nav__link:focus {
+    opacity: .6;
+}
+
+.nav__link_green {
+    margin-left: 14px;
+    padding: 8px 20px;
+    text-align: center;
+    background: #3DDC84;
+    border-radius: 3px;
+    color: black;
+}
+
+.nav__link-account {
+    height: 16px;
+    padding: 8px 20px;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity .3s;
+    background-color: #313131;
+    border-radius: 20px;
+    border-bottom: none;
+}
+
+.nav__link-account:hover, .nav__link-account:focus {
+    opacity: .6;
+}
+
+.nav__link_active {
+    font-weight: 500;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.nav__link-films {
+    padding-right: 0;
+}
+
+.nav__btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent url("../../../images/nav-btn.svg") no-repeat center;
+    transition: linear 200ms;
+}
+
+.nav__btn_close {
+    width: 44px;
+    height: 44px;
+    border: none;
+    z-index: 4;
+    background: transparent url("../../../images/nav-btn-close.svg") no-repeat center;
+}
+
+@media screen and (max-width: 850px) {
+    .nav {
+        display: none;
+    }
+
+    .nav__none-auth {
+        display: flex;
+    }
+}
+
+.nav__mobile {
+    background-color: #202020;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 30%;
+    z-index: 3;
+    overflow: hidden;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+    justify-content: space-around;
+}
+
+.nav__list_mobile {
+    flex-direction: column;
+}
+
+.nav__link_mobile {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 14px 0;
+}
+
+
+
+@media screen and (min-width: 850px) {
+    .nav__btn {
+        display: none;
+    }
+
+    .nav__mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .nav__mobile {
+        left: 0;
+        width: 100%;
+    }
+}
