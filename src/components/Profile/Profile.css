@@ -23,12 +23,14 @@
     display: flex;
     justify-content: space-between;
 }
+
 .profile__info-item div {
     display: flex;
     width: 80%;
     align-items: flex-end;
     flex-direction: column;
 }
+
 .profile__info-item-span {
     text-align: right;
 }

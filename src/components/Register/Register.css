@@ -72,6 +72,7 @@
     cursor: pointer;
     transition: linear 200ms;
 }
+
 .register-btn:hover, .register_btn:focus, .register_btn:active {
     opacity: .8;
     outline: none;
@@ -90,6 +91,7 @@
     font-size: 14px;
     line-height: 17px;
 }
+
 .register__login p {
     margin: 0;
     font-weight: normal;
@@ -97,6 +99,7 @@
     line-height: inherit;
     color: #8B8B8B;
 }
+
 .register__login a {
     margin: 0 0 0 6px;
     text-decoration: none;
@@ -106,6 +109,7 @@
     line-height: inherit;
     transition: linear 300ms;
 }
+
 .register__login a:hover, .register__in a:focus, .register__in a:active {
     opacity: .5;
     outline: none;
@@ -121,13 +125,16 @@
         margin: 56px auto;
         width: 90%;
     }
+  
     .register__logo {
         margin-right: 0;
         align-self: center;
     }
+  
     .register__head {
         text-align: center;
     }
+  
     .register__login {
         font-size: 12px;
         line-height: 15px;
