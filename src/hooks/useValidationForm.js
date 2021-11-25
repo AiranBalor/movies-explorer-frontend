@@ -12,6 +12,6 @@ export function useValidationForm() {
     setValues({...values, [name]: value});
     setIsValid(event.target.closest('form').checkValidity());
   }
-  return {values, setValues, errors, isValid, handleErrors};
+  return {values, setValues, errors, isValid, handleErrors, setIsValid};
 }
 

@@ -63,9 +63,11 @@ class MainApi {
 }
 
 export const api = new MainApi({
-  baseUrl: 'https://api.korotkov.movies.nomoredomains.work',
+  baseUrl: 'http://localhost:3001',
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });
+
+//https://api.korotkov.movies.nomoredomains.work

@@ -29,17 +29,24 @@ import { auth } from "../../utils/auth";
 import * as moviesApi from "../../utils/MoviesApi";
 
 import { useState, useEffect, useCallback } from "react";
-import { Switch, Route, useHistory, useLocation } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  useHistory,
+  useLocation,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [movies, setMovies] = useState([]);
   const [apiMovies, setApiMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [moviesError, setMoviesError] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [tokenChecked, setTokenChecked] = useState(true);
 
   const [infoTooltip, setInfoTooltip] = useState({
     isOpen: false,
@@ -76,7 +83,8 @@ function App() {
   //функция обработки ошибок валидации в формах. получает форму и статус ошибки на вход,
   //фильтрует ошибку и ее сообщение, передает ее в попап статуса
   function handleError(form, statusError) {
-    const errors = statusErrors.filter((error) => error.name === form.name)[0].errors;
+    const errors = statusErrors.filter((error) => error.name === form.name)[0]
+      .errors;
     const statusErrorMessage = errors.filter(
       (error) => error.status === statusError
     )[0].message;
@@ -121,9 +129,8 @@ function App() {
         history.push("/movies");
       })
       .catch((err) => {
-        console.log(err);
-        handleError(event.target, err)
-      })
+        handleError(event.target, err);
+      });
   }
   //функция обновления юзера. записывает результат работы api в стейт текущего пользователя
   function handleUpdateUser(event, name, email) {
@@ -141,30 +148,41 @@ function App() {
         });
       })
       .catch((err) => {
-        handleError(event.target, err)
+        handleError(event.target, err);
       });
   }
 
-  //Проверка токена при повторном посещении сайта
+  // Проверка токена при повторном посещении сайта.
+  // Добавлена проверка состояния tokenChecked в разметку. Если токен проверен, разрешается отрисовка компонентов страницы.
+  // Если токен есть в ЛХ, стейт loggedIn изменяется на true, и выполняется запрос за данными пользователя, затем по получении ответа изменяется
+  // стейт tokenCheсked, позволяя отрисовку. Если же токен в ЛХ отсутствует, стейт loggerIn становится false, не позволяя попасть на защищенные роуты
   const tokenCheck = useCallback(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
+      setTokenChecked(false);
+      setLoggedIn(true);
       auth
         .getContent(token)
         .then((res) => {
           if (res) {
-            setLoggedIn(true);
             setCurrentUser({ ...res });
-            history.push("/movies");
+            setTimeout(() => {
+              setTokenChecked(true);
+            }, 100);
           }
         })
         .catch((err) => {
           localStorage.removeItem("jwt");
         });
     } else {
+      setTokenChecked(true);
       setLoggedIn(false);
     }
-  }, [history]);
+  }, []);
+
+  useEffect(() => {
+    tokenCheck();
+  }, [tokenCheck]);
 
   //Выход из аккаунта
   function signOut() {
@@ -206,7 +224,7 @@ function App() {
   }
 
   // общая функция поиска. обнуляет некоторые стейта, далее в зависимости от того, пришли ли фильмы с сервера, либо запрашивает их, записывает
-  // стейт apiMovies и на них вызвает функцию поиска по ключевому слову, либо сразу вызывает последнюю и записывает результат в локальное хранилище 
+  // стейт apiMovies и на них вызвает функцию поиска по ключевому слову, либо сразу вызывает последнюю и записывает результат в локальное хранилище
   function searchMovies(keyword) {
     setIsLoading(true);
     setMovies([]);
@@ -290,24 +308,25 @@ function App() {
       .catch((err) => console.log(`Error: ${err}`));
   }
 
-  //эффект проверки наличия токена
-  useEffect(() => {
-    tokenCheck();
-  }, [tokenCheck]);
-
   // Загрузка данных пользователя
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser({ ...data });
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    const token = localStorage.getItem("jwt");
+    if (loggedIn && token) {
+      api
+        .getUserInfo()
+        .then((data) => {
+          setCurrentUser({ ...data });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
-  // Загрузка фильмов
+  // Загрузка фильмов. Некоторые запросы уходили раньше, чем определяось состояние loggedIn в вышеописанном useEffect. Это приводило к появлению
+  // ошибки 401, когда действия, требующие наличия токена, выполнялись без него. Поправлено.
   useEffect(() => {
-    if (loggedIn) {
+    debugger;
+    const token = localStorage.getItem("jwt");
+    if (loggedIn && token) {
       const movies = localStorage.getItem("movies");
       const savedMovies = localStorage.getItem("savedMovies");
       if (movies) {
@@ -331,58 +350,68 @@ function App() {
     <AppContext.Provider value={{ loggedIn, handleLogin, signOut }}>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__container">
-          <Switch>
-            <Route path="/signup">
-              <Register
-                handleRegister={handleRegister}
-                handleError={handleError}
-              />
-            </Route>
-            <Route path="/signin">
-              <Login handleLogin={handleLogin} handleError={handleError} />
-            </Route>
-            <ProtectedRoute path="/profile">
-              <Header isLogin={loggedIn} />
-              <Profile onUpdateUser={handleUpdateUser} />
-            </ProtectedRoute>
-            <ProtectedRoute path="/saved-movies">
-              <Header isLogin={loggedIn} />
-              <SavedMovies
-                isLoading={isLoading}
-                movies={savedMovies}
-                moviesError={moviesError}
-                notFound={notFound}
-                handleSearchSavedMovies={searchSavedMovies}
-                isShortMovies={isShortMovies}
-                handleDeleteMovie={deleteMovie}
-                handleShortMovies={handleShortMovies}
-              />
-              <Footer />
-            </ProtectedRoute>
-            <ProtectedRoute path="/movies">
-              <Header isLogin={loggedIn} />
-              <Movies
-                isLoading={isLoading}
-                movies={movies}
-                moviesError={moviesError}
-                notFound={notFound}
-                handleSearchMovies={searchMovies}
-                handleShortMovies={handleShortMovies}
-                isShortMovies={isShortMovies}
-                handleSaveMovie={saveMovie}
-                handleDeleteMovie={deleteMovie}
-              />
-              <Footer />
-            </ProtectedRoute>
-            <Route exact path="/">
-              <Header isLogin={loggedIn}/>
-              <About />
-              <Footer />
-            </Route>
-            <Route path="*">
-              <NotFound />
-            </Route>
-          </Switch>
+          {tokenChecked && (
+            <Switch>
+              <Route path="/signup">
+                {!loggedIn ? ( //если пользователь авторизирован, попасть на страницы регистрации и логина нельзя
+                  <Register
+                    handleRegister={handleRegister}
+                    handleError={handleError}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )}
+              </Route>
+              <Route path="/signin">
+                {!loggedIn ? (
+                  <Login handleLogin={handleLogin} handleError={handleError} />
+                ) : (
+                  <Redirect to="/" />
+                )}
+              </Route>
+              <ProtectedRoute path="/profile">
+                <Header isLogin={loggedIn} />
+                <Profile onUpdateUser={handleUpdateUser} />
+              </ProtectedRoute>
+              <ProtectedRoute path="/saved-movies">
+                <Header isLogin={loggedIn} />
+                <SavedMovies
+                  isLoading={isLoading}
+                  movies={savedMovies}
+                  moviesError={moviesError}
+                  notFound={notFound}
+                  handleSearchSavedMovies={searchSavedMovies}
+                  isShortMovies={isShortMovies}
+                  handleDeleteMovie={deleteMovie}
+                  handleShortMovies={handleShortMovies}
+                />
+                <Footer />
+              </ProtectedRoute>
+              <ProtectedRoute path="/movies">
+                <Header isLogin={loggedIn} />
+                <Movies
+                  isLoading={isLoading}
+                  movies={movies}
+                  moviesError={moviesError}
+                  notFound={notFound}
+                  handleSearchMovies={searchMovies}
+                  handleShortMovies={handleShortMovies}
+                  isShortMovies={isShortMovies}
+                  handleSaveMovie={saveMovie}
+                  handleDeleteMovie={deleteMovie}
+                />
+                <Footer />
+              </ProtectedRoute>
+              <Route exact path="/">
+                <Header isLogin={loggedIn} />
+                <About />
+                <Footer />
+              </Route>
+              <Route path="*">
+                <NotFound />
+              </Route>
+            </Switch>
+          )}
           <InfoTooltip
             isOpen={infoTooltip.isOpen}
             isLoading={isLoading}

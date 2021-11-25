@@ -40,6 +40,8 @@ function Register({ handleRegister }) {
           required
           className={`register__form-input ${errors.email && "error"}`}
           type="email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          placeholder="Введите адрес электронной почты. Не забудьте указать домен, например example@example.com"
           name="email"
           value={values.email || ""}
           onChange={handleErrors}

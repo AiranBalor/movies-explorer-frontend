@@ -48,6 +48,14 @@
     border-bottom: 1px solid #4285F4;
 }
 
+.register__form-input::placeholder {
+    font-size: 8px;
+}
+
+.register__form-input:focus::placeholder {
+    color: transparent;
+}
+
 .register__form-span {
     display: block;
     margin: 6px 0;

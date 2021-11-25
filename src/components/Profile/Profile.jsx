@@ -9,7 +9,7 @@ function Profile({ onUpdateUser }) {
   const [isEdit, setIsEdit] = useState(false);
   const value = useContext(AppContext);
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleErrors, errors, isValid } = useValidationForm();
+  const { values, handleErrors, errors, isValid, setIsValid } = useValidationForm();
   const inputRef = useRef();
 
   //функция-переключатель состояния редактирования
@@ -19,9 +19,13 @@ function Profile({ onUpdateUser }) {
   //функция обработки сабмита формы: передает в функцию из App-компонента событие и значения инпутов при редактировании данных либо
   // значения инпутов по умолчанию, которые берутся из контекста.
   function handleSubmit(event) {
+    debugger;
     event.preventDefault();
     onUpdateUser(event, values.name || currentUser.name, values.email || currentUser.email);
     setIsEdit(false);
+    setIsValid(false); //кнопка Сохранить оставалась активной после повторной попытки редактировать данные, поскольку при первом редактировании
+    //профиля при вводе чего-либо в инпуты осуществлялась проверка валидности полей, изменявшая стейт isValid. После завершения редактирования
+    //значение стейта оставалось прежним (true), что позволяло сохранять одни и те же данные. Поправлено.
   }
 
   return (
