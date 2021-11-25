@@ -9,4 +9,3 @@ ___
 ___
 ## Ссылка на проект
 https://korotkov.movies-explorer.nomoredomains.work
-
