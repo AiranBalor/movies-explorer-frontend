@@ -10,7 +10,7 @@ function SearchForm(props) {
 function onSubmit(event) {
     event.preventDefault();
     if (searchInputValue) {
-      return props.handleSearchMovies(searchInputValue);
+      return props.handleSearchMovies(searchInputValue.toLowerCase());
     } else {
       return setIsSearchFormValid(false)
     } 

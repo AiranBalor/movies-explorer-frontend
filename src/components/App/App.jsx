@@ -212,7 +212,7 @@ function App() {
     let foundMovies = [];
 
     movies.forEach((movie) => {
-      if (movie.nameRU.indexOf(keyword) > -1) {
+      if (movie.nameRU.toLowerCase().indexOf(keyword) > -1) {
         if (isShortMovies) {
           movie.duration <= 40 && foundMovies.push(movie);
         } else {
@@ -226,6 +226,7 @@ function App() {
   // общая функция поиска. обнуляет некоторые стейта, далее в зависимости от того, пришли ли фильмы с сервера, либо запрашивает их, записывает
   // стейт apiMovies и на них вызвает функцию поиска по ключевому слову, либо сразу вызывает последнюю и записывает результат в локальное хранилище
   function searchMovies(keyword) {
+    debugger;
     setIsLoading(true);
     setMovies([]);
     setNotFound(false);
@@ -250,6 +251,7 @@ function App() {
           setMovies([]);
         })
         .finally(() => {
+          console.log("Finally");
           setIsLoading(false);
         });
     } else {
@@ -262,6 +264,7 @@ function App() {
       } else if (searchResult.length !== 0) {
         localStorage.setItem("movies", JSON.stringify(searchResult));
         setMovies(JSON.parse(localStorage.getItem("movies")));
+        setIsLoading(false);
       } else {
         setMoviesError(true);
         setMovies([]);
@@ -324,7 +327,6 @@ function App() {
   // Загрузка фильмов. Некоторые запросы уходили раньше, чем определяось состояние loggedIn в вышеописанном useEffect. Это приводило к появлению
   // ошибки 401, когда действия, требующие наличия токена, выполнялись без него. Поправлено.
   useEffect(() => {
-    debugger;
     const token = localStorage.getItem("jwt");
     if (loggedIn && token) {
       const movies = localStorage.getItem("movies");

@@ -9,8 +9,16 @@ function Profile({ onUpdateUser }) {
   const [isEdit, setIsEdit] = useState(false);
   const value = useContext(AppContext);
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleErrors, errors, isValid, setIsValid } = useValidationForm();
+  const { values, handleErrors, errors, isValid, setIsValid } =
+    useValidationForm();
   const inputRef = useRef();
+
+  console.log(currentUser);
+
+  console.log(isValid);
+
+  const userCheck = (values.name === (currentUser.name || undefined) && values.email === (currentUser.email || undefined))
+  console.log(userCheck);
 
   //функция-переключатель состояния редактирования
   function handleOnEdit() {
@@ -19,9 +27,12 @@ function Profile({ onUpdateUser }) {
   //функция обработки сабмита формы: передает в функцию из App-компонента событие и значения инпутов при редактировании данных либо
   // значения инпутов по умолчанию, которые берутся из контекста.
   function handleSubmit(event) {
-    debugger;
     event.preventDefault();
-    onUpdateUser(event, values.name || currentUser.name, values.email || currentUser.email);
+    onUpdateUser(
+      event,
+      values.name || currentUser.name,
+      values.email || currentUser.email
+    );
     setIsEdit(false);
     setIsValid(false); //кнопка Сохранить оставалась активной после повторной попытки редактировать данные, поскольку при первом редактировании
     //профиля при вводе чего-либо в инпуты осуществлялась проверка валидности полей, изменявшая стейт isValid. После завершения редактирования
@@ -83,9 +94,17 @@ function Profile({ onUpdateUser }) {
           <button
             type="submit"
             onClick={handleSubmit}
-            disabled={!isValid}
+            disabled={
+              !isValid ||
+              (values.name === (currentUser.name || undefined) &&
+              values.email === (currentUser.email || undefined))
+            }
             className={`profile__setup-edit ${
-              !isValid && "profile__setup-edit_disabled"
+              !isValid ||
+              (values.name === (currentUser.name || undefined) &&
+              values.email === (currentUser.email || undefined))
+                ? "profile__setup-edit_disabled"
+                : ""
             }`}
           >
             Сохранить

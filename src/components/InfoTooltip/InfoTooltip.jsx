@@ -2,6 +2,7 @@ import './InfoTooltip.css';
 import Preloader from "../Preloader/Preloader";
 
 function InfoTooltip(props) {
+  console.log(props.isLoading);
   return (
     <div className={`popup ${props.isOpen && 'popup_opened'} popup_type_${props.name}`} onClick={(event) => {
       if (event.target.classList.contains('popup')) props.onClose()
