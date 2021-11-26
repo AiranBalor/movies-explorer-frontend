@@ -13,13 +13,6 @@ function Profile({ onUpdateUser }) {
     useValidationForm();
   const inputRef = useRef();
 
-  console.log(currentUser);
-
-  console.log(isValid);
-
-  const userCheck = (values.name === (currentUser.name || undefined) && values.email === (currentUser.email || undefined))
-  console.log(userCheck);
-
   //функция-переключатель состояния редактирования
   function handleOnEdit() {
     setIsEdit(!isEdit);
