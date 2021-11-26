@@ -63,7 +63,7 @@ class MainApi {
 }
 
 export const api = new MainApi({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.korotkov.movies.nomoredomains.work',
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
