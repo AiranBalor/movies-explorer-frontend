@@ -2,9 +2,8 @@ import "./Navigation.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
-function Navigation() {
+function Navigation({ isLogin }) {
   const [isNavOpened, setIsNavOpened] = useState(false);
-  const [isAuth, setIsAuth] = useState(true); //стейт авторизации. чтобы увидеть header для авторизированного пользователя, измените стейт на true
 
   function handleNavClick() {
     setIsNavOpened(!isNavOpened);
@@ -16,7 +15,7 @@ function Navigation() {
 
   return (
     <>
-      {isAuth ? (
+      {isLogin ? (
         <>
           <button
             type="button"

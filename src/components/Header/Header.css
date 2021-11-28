@@ -17,5 +17,5 @@
 }
 
 .header__logo:focus, .header__logo:hover {
-    opacity: 50%;
+    opacity: 0.5;
 }

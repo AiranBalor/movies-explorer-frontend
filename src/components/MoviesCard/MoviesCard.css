@@ -70,7 +70,6 @@
     cursor: pointer;
 }
 
-/*Добавил эффект, потому что стандартный opacity на темном фоне не виден*/
 .movies-card__item-save:hover {
     transform: scale(1.2);
     transition: linear .3s;

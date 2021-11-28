@@ -39,9 +39,12 @@
 }
 
 .nav__link_green {
+    margin-left: 14px;
+    padding: 8px 20px;
+    text-align: center;
     background: #3DDC84;
     border-radius: 3px;
-    --white-color: black;
+    color: black;
 }
 
 .nav__link-account {
