@@ -4,7 +4,7 @@ import notFoundImage from "../../images/notFoundImage.jpg";
 
 function MoviesCard(props) {
   const [isSaved, setIsSaved] = useState(false);
-  
+
   //определим, какие варианты есть у данных фильма
   const filmData = {
     country: props.movie.country || "Не указано",
@@ -77,17 +77,20 @@ function MoviesCard(props) {
             isSaved ? "movies-card__item-saved" : "movies-card__item-save"
           }`}
           onClick={!isSaved ? handleSaveMovie : handleDislikeMovie}
-        >
-        </button>
+        ></button>
       )}
-
-      <div className="movies-card__item">
+      <div className="movies-card__item movies-card__info">
+        <h3 className="movies-card__item-header">{props.movie.nameRU}</h3>
+        <p className="movies-card__item-duration">{`${formattedTime}`}</p>
+      </div>
+      <div className="movies-card__item movies-card__item-preview">
         <a
           rel="noreferrer"
           target="_blank"
           href={
             props.isSavedMovies ? props.movie.trailer : props.movie.trailerLink
           }
+          className="movies-card__item-link"
         >
           <img
             className="movies-card__item-image"
@@ -95,10 +98,6 @@ function MoviesCard(props) {
             alt={`Картинка фильма ${props.movie.nameRU}`}
           />
         </a>
-      </div>
-      <div className="movies-card__item movies-card__info">
-        <h3 className="movies-card__item-header">{props.movie.nameRU}</h3>
-        <p className="movies-card__item-duration">{`${formattedTime}`}</p>
       </div>
     </div>
   );
