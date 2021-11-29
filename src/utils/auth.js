@@ -57,3 +57,4 @@ class Auth {
 export const auth = new Auth({
   baseUrl: 'https://api.korotkov.movies.nomoredomains.work',
 })
+
